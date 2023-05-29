@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  ngOnInit(): void {
+    const input = document.getElementById('autocomplete-input') as HTMLInputElement;
+    const autocompleteOptions = {
+      componentRestrictions: { country: 'AR' }
+    };
+    const autocomplete = new google.maps.places.Autocomplete(input, autocompleteOptions);
+
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      console.log('Place:', place);
+    });
+  }
 }
+
